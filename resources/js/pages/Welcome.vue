@@ -1,9 +1,13 @@
 <template>
     <div>
-        <h1>welcome</h1>
+        hello world
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 
 </script>
+
+<style scoped>
+
+</style>
