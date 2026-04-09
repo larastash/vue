@@ -4,6 +4,7 @@ import tailwindcss from '@tailwindcss/vite';
 import vue from '@vitejs/plugin-vue';
 import laravel from 'laravel-vite-plugin';
 import { defineConfig } from 'vite';
+import path from 'path';
 
 export default defineConfig({
     plugins: [
@@ -28,6 +29,12 @@ export default defineConfig({
     server: {
         watch: {
             ignored: ['**/storage/framework/views/**'],
+        },
+    },
+    resolve: {
+        alias: {
+            '@js': path.resolve(__dirname, './resources/js'),
+            '@css': path.resolve(__dirname, './resources/css'),
         },
     },
 });

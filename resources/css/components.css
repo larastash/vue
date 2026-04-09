@@ -1,0 +1,9 @@
+@layer components {
+    #nprogress .bar {
+        @apply bg-(--progress-color)!;
+    }
+
+    #nprogress .peg {
+        box-shadow: 0 0 10px var(--progress-color), 0 0 5px var(--progress-color) !important;
+    }
+}
