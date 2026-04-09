@@ -1,10 +1,10 @@
 /**
- * Русская плюрализация.
+ * Russian pluralization.
  *
- * @param n — число.
- * @param forms — массив форм [один, два, много].
- * @param includeNumber — подставить число перед словом.
- * @returns Отформатированная строка.
+ * @param n - The number.
+ * @param forms - Array of word forms [one, few, many].
+ * @param includeNumber - Prepend the number before the word.
+ * @returns Formatted string.
  *
  * @example plural(1, ['яблоко', 'яблока', 'яблок']); // "1 яблоко"
  * @example plural(5, ['яблоко', 'яблока', 'яблок']); // "5 яблок"
@@ -29,9 +29,7 @@ export function plural(
   let word: string;
 
   if (!Number.isInteger(absN)) {
-    // Для дробных чисел обычно используется средняя форма (генитив единственного числа)
-    // например: 1.5 яблока, но иногда может требоваться другая логика в зависимости от ТЗ.
-    // Здесь оставлена логика из оригинала (forms[1]).
+    // Fractional numbers typically use the genitive singular form (forms[1])
     word = forms[1];
   } else {
     const lastDigit = absN % 10;
@@ -54,14 +52,14 @@ export function plural(
 }
 
 /**
- * Обрезка строки с троеточием.
+ * Truncate a string with a suffix.
  *
- * @param str Исходная строка.
- * @param length Максимальная длина.
- * @param suffix Суффикс обрезки.
- * @returns Обрезанная строка.
+ * @param str - Source string.
+ * @param length - Maximum length.
+ * @param suffix - Truncation suffix.
+ * @returns Truncated string.
  *
- * @example truncate('Привет мир!', 7); // "Привет…"
+ * @example truncate('Hello world!', 7); // "Hello…"
  */
 export function truncate(
   str: string | null | undefined,
@@ -73,12 +71,12 @@ export function truncate(
 }
 
 /**
- * Форматирование числа с разделителями разрядов.
+ * Format a number with locale-aware separators.
  *
- * @param value Число для форматирования.
- * @param locale Локаль.
- * @param options Опции Intl.NumberFormat.
- * @returns Отформатированная строка.
+ * @param value - Number to format.
+ * @param locale - Locale string.
+ * @param options - Intl.NumberFormat options.
+ * @returns Formatted string.
  *
  * @example formatNumber(1234567); // "1 234 567"
  * @example formatNumber(1234.5, 'ru-RU', { minimumFractionDigits: 2 }); // "1 234,50"
@@ -94,12 +92,12 @@ export function formatNumber(
 }
 
 /**
- * Форматирование цены (денежная сумма).
+ * Format a monetary amount with currency symbol.
  *
- * @param value Сумма.
- * @param currency Код валюты (ISO 4217).
- * @param locale Локаль.
- * @returns Отформатированная строка с валютой.
+ * @param value - Amount.
+ * @param currency - ISO 4217 currency code.
+ * @param locale - Locale string.
+ * @returns Formatted currency string.
  *
  * @example formatCurrency(2999.9); // "2 999,90 ₽"
  */
@@ -117,12 +115,12 @@ export function formatCurrency(
 }
 
 /**
- * Форматирование даты.
+ * Format a date string or Date object.
  *
- * @param date Дата или строка даты.
- * @param options Опции Intl.DateTimeFormat.
- * @param locale Локаль.
- * @returns Отформатированная дата.
+ * @param date - Date or date string.
+ * @param options - Intl.DateTimeFormat options.
+ * @param locale - Locale string.
+ * @returns Formatted date string.
  *
  * @example formatDate('2026-02-20'); // "20 февр. 2026 г."
  * @example formatDate('2026-02-20', { day: 'numeric', month: 'long' }); // "20 февраля"
@@ -138,10 +136,10 @@ export function formatDate(
 }
 
 /**
- * Копирование текста в буфер обмена.
+ * Copy text to the clipboard.
  *
- * @param text Текст для копирования.
- * @returns true, если успешно, иначе false.
+ * @param text - Text to copy.
+ * @returns `true` if successful, `false` otherwise.
  */
 export async function copyToClipboard(text: string): Promise<boolean> {
   try {
@@ -153,13 +151,13 @@ export async function copyToClipboard(text: string): Promise<boolean> {
 }
 
 /**
- * Безопасный доступ к вложенным свойствам через точечную нотацию.
+ * Safely access nested object properties via dot-notation path.
  *
- * @template T Тип возвращаемого значения (или defaultValue).
- * @param obj Объект.
- * @param path Путь, например 'user.address.city'.
- * @param defaultValue Значение по умолчанию.
- * @returns Значение свойства или defaultValue.
+ * @template T - Return type.
+ * @param obj - Source object.
+ * @param path - Dot-notation path, e.g. `'user.address.city'`.
+ * @param defaultValue - Fallback value.
+ * @returns The value at the path, or `defaultValue`.
  *
  * @example dataGet({ a: { b: 1 } }, 'a.b'); // 1
  * @example dataGet({}, 'a.b', 'fallback'); // "fallback"
@@ -179,25 +177,24 @@ export function dataGet<T = unknown>(
 }
 
 /**
- * Генерация случайного ID (UUID v4 если поддерживается, иначе fallback).
+ * Generate a random ID (UUID v4 if supported, fallback otherwise).
  *
- * @returns Уникальный идентификатор.
+ * @returns Unique identifier string.
  */
 export function uid(): string {
-  // Проверка наличия crypto.randomUUID
   if (typeof crypto !== 'undefined' && crypto.randomUUID) {
     return crypto.randomUUID();
   }
 
-  // Fallback для старых сред или SSR (если crypto не доступен глобально)
+  // Fallback for older runtimes or SSR
   return `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 9)}`;
 }
 
 /**
- * Ожидание N миллисекунд (для async/await цепочек).
+ * Wait for N milliseconds (for async/await chains).
  *
- * @param ms Количество миллисекунд.
- * @returns Промис, который резолвится через указанное время.
+ * @param ms - Milliseconds to wait.
+ * @returns Promise that resolves after the specified time.
  *
  * @example await sleep(500);
  */

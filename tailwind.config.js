@@ -27,7 +27,7 @@ module.exports = {
                 gray: colors.zinc,
             },
             borderRadius: {
-                brand: defaultTheme.borderRadius['lg'],
+                brand: defaultTheme.borderRadius['xl'],
             },
         },
     },

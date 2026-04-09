@@ -1,9 +1,9 @@
 import { ComputedRef, readonly, ref, Ref } from 'vue';
 
-// 1. Описываем варианты внешнего вида (например, для цвета кнопки)
+/** Visual variant for the confirm dialog (e.g. button color). */
 export type ConfirmVariant = 'default' | 'danger' | 'warning' | 'success' | 'info';
 
-// 2. Интерфейс входных параметров (то, что передаем в confirm)
+/** Options passed to the `confirm()` call. */
 export interface ConfirmOptions {
   title?: string;
   message?: string;
@@ -12,7 +12,7 @@ export interface ConfirmOptions {
   variant?: ConfirmVariant;
 }
 
-// 3. Интерфейс внутреннего состояния диалога (всегда с заполненными полями)
+/** Internal dialog state (all fields are always populated with defaults). */
 interface ConfirmState {
   title: string;
   message: string;
@@ -21,42 +21,25 @@ interface ConfirmState {
   variant: ConfirmVariant;
 }
 
-// Глобальные реактивные переменные (синглтон-состояние)
+// Singleton reactive state shared across all useConfirm() instances
 const visible = ref(false);
 const state = ref<ConfirmState | null>(null);
 
-// Тип для функции разрешения промиса
 let resolvePromise: ((value: boolean) => void) | null = null;
 
-/**
- * Программный confirm-диалог через Promise.
- *
- * @example
- * const { confirm } = useConfirm();
- *
- * const ok = await confirm({
- *     title: 'Удалить запись?',
- *     message: 'Это действие нельзя отменить.',
- *     confirmText: 'Удалить',
- *     cancelText: 'Отмена',
- *     variant: 'danger',
- * });
- *
- * if (ok) { ... }
- */
 export function useConfirm() {
   /**
-   * Открывает диалог подтверждения.
-   * @param options Настройки диалога.
-   * @returns Promise<boolean> - true если подтверждено, false если отменено.
+   * Open a confirm dialog.
+   * @param options - Dialog configuration.
+   * @returns `true` if confirmed, `false` if cancelled.
    */
   const confirm = (options: ConfirmOptions = {}): Promise<boolean> => {
-    // Инициализируем состояние значениями по умолчанию + переданные опции
+    // Merge defaults with provided options
     state.value = {
-      title: options.title ?? 'Подтверждение',
-      message: options.message ?? 'Вы уверены?',
-      confirmText: options.confirmText ?? 'Подтвердить',
-      cancelText: options.cancelText ?? 'Отмена',
+      title: options.title ?? 'Confirm',
+      message: options.message ?? 'Are you sure?',
+      confirmText: options.confirmText ?? 'Confirm',
+      cancelText: options.cancelText ?? 'Cancel',
       variant: options.variant ?? 'default',
     };
 
@@ -84,8 +67,9 @@ export function useConfirm() {
   };
 
   return {
-    // readonly предотвращает изменение состояния напрямую из компонентов
+    /** Whether the dialog is currently visible. */
     visible: readonly(visible) as ComputedRef<boolean>,
+    /** Current dialog state (title, message, variant, etc.). */
     state: readonly(state) as ComputedRef<ConfirmState | null>,
     confirm,
     accept,

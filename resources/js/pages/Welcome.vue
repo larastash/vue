@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import Guest from '@/components/Auth/Guest.vue';
 import Scope from '@/components/Scope.vue';
 import { useTheme } from '@/composables/useTheme';
 import Application from '@/layouts/Application.vue';
 import { Head } from '@inertiajs/vue3';
-import { ExternalLinkIcon, MoonIcon, SunIcon, SunMoonIcon } from '@lucide/vue';
+import { ExternalLinkIcon, MoonIcon, SmileIcon, SunIcon, SunMoonIcon } from '@lucide/vue';
+import { toast } from 'vue-sonner';
 
 defineProps({
     quote: String,
@@ -34,7 +34,10 @@ const { currentTheme, toggleTheme } = useTheme();
         </div>
 
         <div class="absolute top-4 right-4 flex items-center gap-4">
-            <button @click="toggleTheme" class="block text-black dark:text-white">
+            <button @click="toast.success('Hello world!', { description: 'This is a toast message' })" v-tooltip="`Toast`" class="block text-black dark:text-white">
+                <SmileIcon class="shrink-0 size-5" />
+            </button>
+            <button @click="toggleTheme" v-tooltip="`Theme`" class="block text-black dark:text-white">
                 <SunIcon v-if="currentTheme === 'light'" class="shrink-0 size-5" />
                 <MoonIcon v-if="currentTheme === 'dark'" class="shrink-0 size-5" />
                 <SunMoonIcon v-if="currentTheme === 'system'" class="shrink-0 size-5" />
@@ -60,13 +63,13 @@ const { currentTheme, toggleTheme } = useTheme();
                         <p class="text-gray-500 dark:text-gray-500">ready for something awesome</p>
                     </div>
                     <a
-                        href="https://github.com/larastash/vue-kit"
+                        href="https://github.com/chipslays/vue"
                         target="_blank"
                         rel="noopener noreferrer"
                         class="text-gray-500 dark:text-gray-500 hover:text-black dark:hover:text-white flex items-center gap-2"
                     >
                         <ExternalLinkIcon class="shrink-0 size-4" />
-                        <span>larastash/vue-kit</span>
+                        <span>chipslays/vue</span>
                     </a>
                 </div>
             </div>

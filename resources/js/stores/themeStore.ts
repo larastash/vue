@@ -1,12 +1,11 @@
 import { defineStore } from 'pinia';
 
-// 1. Определяем типы
 export type Theme = 'light' | 'dark' | 'system';
 
 export const validThemes: Theme[] = ['light', 'dark', 'system'];
 export const defaultTheme: Theme = 'system';
 
-// 2. Глобальные переменные для слушателя системной темы
+// Module-level singleton state for the system theme listener
 let initialized = false;
 let removeSystemListener: (() => void) | null = null;
 
@@ -25,13 +24,12 @@ export const useThemeStore = defineStore('themeStore', {
   }),
 
   getters: {
-    // effectiveTheme всегда возвращает конкретную тему 'light' или 'dark'
+    /** Resolved theme — always `'light'` or `'dark'` (never `'system'`). */
     effectiveTheme(state): Exclude<Theme, 'system'> {
       if (state.currentTheme === 'system') {
         const mq = getMediaQuery();
         return mq?.matches ? 'dark' : 'light';
       }
-      // Приводим тип, так как мы знаем, что здесь не 'system'
       return state.currentTheme as Exclude<Theme, 'system'>;
     },
 
@@ -42,8 +40,6 @@ export const useThemeStore = defineStore('themeStore', {
 
   actions: {
     setTheme(theme: Theme) {
-      // Проверка на валидность уже обеспечена типом Theme,
-      // но оставляем фоллбек на случай передачи любого string из JS-кода
       if (validThemes.includes(theme)) {
         this.currentTheme = theme;
       } else {
@@ -55,14 +51,14 @@ export const useThemeStore = defineStore('themeStore', {
     applyTheme() {
       if (typeof document === 'undefined') return;
 
-      // Добавляем/убираем класс 'dark' для Tailwind CSS
+      // Toggle 'dark' class for Tailwind CSS
       if (this.isDark) {
         document.documentElement.classList.add('dark');
       } else {
         document.documentElement.classList.remove('dark');
       }
 
-      // Сохраняем текущую настройку пользователя (включая 'system') в data-атрибут
+      // Store the user's theme preference (including 'system') as a data attribute
       document.documentElement.dataset.theme = this.currentTheme;
     },
 
@@ -70,7 +66,7 @@ export const useThemeStore = defineStore('themeStore', {
       if (initialized) return;
       initialized = true;
 
-      // Если после гидратации пришло невалидное значение (маловероятно с типами, но возможно при ручном изменении localStorage)
+      // Guard against invalid values from localStorage
       if (!validThemes.includes(this.currentTheme)) {
         this.currentTheme = defaultTheme;
       }
@@ -80,7 +76,6 @@ export const useThemeStore = defineStore('themeStore', {
     },
 
     _bindSystemListener() {
-      // Очищаем предыдущий слушатель, если он был
       if (removeSystemListener) {
         removeSystemListener();
         removeSystemListener = null;
@@ -90,16 +85,15 @@ export const useThemeStore = defineStore('themeStore', {
       if (!mq) return;
 
       const handler = () => {
-        // Пересчитываем тему только если выбран режим 'system'
+        // Only re-apply when the user has selected 'system'
         if (this.currentTheme === 'system') {
           this.applyTheme();
         }
       };
 
-      // Для современных браузеров используем addEventListener
+      // For modern browsers
       mq.addEventListener('change', handler);
 
-      // Запоминаем функцию очистки
       removeSystemListener = () => {
         mq.removeEventListener('change', handler);
       };
@@ -109,9 +103,8 @@ export const useThemeStore = defineStore('themeStore', {
   persist: {
     key: 'theme',
     pick: ['currentTheme'],
-    // afterHydrate вызывается после восстановления состояния из хранилища
+    // Apply theme immediately after hydrating from localStorage
     afterHydrate(ctx) {
-      // ctx.store имеет тип нашего стора, поэтому applyTheme доступен
       ctx.store.applyTheme();
     },
   },

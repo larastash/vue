@@ -2,18 +2,15 @@ import { usePage } from '@inertiajs/vue3';
 import { computed, ComputedRef, watch } from 'vue';
 import { toast } from 'vue-sonner';
 
-// 1. Описываем структуру Flash-сообщений
-// Вы можете расширить этот интерфейс, если используете другие ключи в Laravel
 export interface FlashMessages {
   success?: string;
   error?: string;
   warning?: string;
   info?: string;
   message?: string;
-  [key: string]: string | undefined; // Для поддержки кастомных ключей
+  [key: string]: string | undefined;
 }
 
-// 2. Типы для маппинга тостов
 type ToastType = 'success' | 'error' | 'warning' | 'info' | 'message';
 
 const flashToastMap: Record<string, ToastType> = {
@@ -24,13 +21,9 @@ const flashToastMap: Record<string, ToastType> = {
   message: 'message',
 };
 
-/**
- * Композабл для доступа к Flash-сообщениям из Inertia props.
- */
 export function useFlash() {
   const page = usePage();
 
-  // Приводим props.flash к нашему интерфейсу
   const flash = computed<FlashMessages>(() => {
     return (page.props?.flash as FlashMessages) ?? {};
   });
@@ -60,18 +53,20 @@ export function useFlash() {
 }
 
 /**
- * Авто-показ тостов из Inertia flash.
+ * Auto-show toasts from Inertia flash messages.
  *
- * Вызови один раз в AppLayout — и все flash-сообщения из Laravel
- * будут автоматически показаны как тосты.
+ * Call once in your app layout — all flash messages from Laravel
+ * will automatically appear as toasts.
+ *
+ * Supports: `success`, `error`, `warning`, `info`, `message`.
  *
  * @example
- * // В AppLayout.vue:
+ * // In your layout:
  * import { useFlashToasts } from '@/composables/useFlash';
  * useFlashToasts();
  *
- * // В контроллере Laravel:
- * return back()->with('success', 'Сохранено!');
+ * // In a Laravel controller:
+ * return back()->with('flash', ['success' => 'Saved!']);
  */
 export function useFlashToasts() {
   const page = usePage();
@@ -81,21 +76,15 @@ export function useFlashToasts() {
     (flash) => {
       if (!flash) return;
 
-      // Проходим по всем известным ключам тостов
+      // Iterate over known toast keys
       for (const [key, type] of Object.entries(flashToastMap)) {
         const message = flash[key];
 
-        // Пропускаем, если сообщения нет или оно пустое
         if (!message) continue;
 
-        // vue-sonner поддерживает вызов toast.success(), toast.error() и т.д.
-        // Для типа 'message' используем обычный toast()
         if (type === 'message') {
           toast(message);
         } else {
-          // TypeScript может ругаться на динамический доступ к методам toast,
-          // поэтому используем приведение типа или проверку.
-          // Так как мы контролируем flashToastMap, это безопасно.
           (toast as any)[type](message);
         }
       }

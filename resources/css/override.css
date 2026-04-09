@@ -1,0 +1,3 @@
+.tippy-box, .tippy-arrow, .tippy-content {
+    @apply bg-gray-800! dark:bg-white! text-white! dark:text-black! rounded-brand! text-xs! font-medium!;
+}
