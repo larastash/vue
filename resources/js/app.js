@@ -1,4 +1,4 @@
-import { createInertiaApp } from "@inertiajs/vue3";
+import { createInertiaApp } from '@inertiajs/vue3';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ru';
 import relativeTime from 'dayjs/plugin/relativeTime';
@@ -8,6 +8,7 @@ import 'tippy.js/animations/scale-subtle.css';
 import 'tippy.js/dist/tippy.css';
 import 'vue-sonner/style.css';
 import { plugin as VueTippy } from 'vue-tippy';
+import { ZiggyVue } from 'ziggy-js';
 
 dayjs.locale('ru');
 dayjs.extend(relativeTime);
@@ -20,6 +21,7 @@ createInertiaApp({
     withApp(app) {
         app
             .use(pinia)
+            .use(ZiggyVue)
             .use(VueTippy, {
                 directive: 'tooltip',
                 component: 'tippy',
