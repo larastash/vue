@@ -2,11 +2,11 @@
     <Toaster :visibleToasts="3" :closeButton="true" position="bottom-center" :duration="5000" offset="16px" :toastOptions="{
         unstyled: true,
         classes: {
-            toast: 'bg-white dark:bg-gray-800 p-4 rounded-brand border flex items-center gap-4 md:min-w-96 shadow-xl shadow-gray-950/5 [&:has(.description)]:items-start font-sans',
+            toast: 'bg-white dark:bg-gray-800 p-4 rounded-brand border flex items-center gap-4 md:min-w-96 shadow-xl shadow-gray-950/5 [&:has(.description)]:items-start font-sans [&:has(.description)_.icon-wrapper]:mt-0.5',
             content: 'flex-1',
-            title: 'text-black dark:text-white text-sm font-medium hyphens-auto',
+            title: 'text-black dark:text-white text-sm hyphens-auto',
             description: 'description mt-1 text-gray-500 dark:text-gray-400 text-sm hyphens-auto',
-            icon: 'mt-0.5 flex shrink-0',
+            icon: 'icon-wrapper flex shrink-0',
             actionButton: 'border border-transparent px-4 py-1 rounded-brand font-medium text-xs bg-black dark:bg-white text-white dark:text-black',
             cancelButton: 'bg-gray-300 hover:bg-gray-400 text-gray-800 px-3 py-1 rounded text-xs',
             closeButton: 'order-2 text-gray-300 hover:text-gray-500 dark:text-gray-500 dark:hover:text-gray-200 flex-shrink-0',

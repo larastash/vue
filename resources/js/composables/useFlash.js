@@ -1,5 +1,5 @@
 import { usePage } from '@inertiajs/vue3';
-import { computed, watch } from 'vue';
+import { computed, nextTick, reactive, watch } from 'vue';
 import { toast } from 'vue-sonner';
 
 const flashToastMap = {
@@ -13,32 +13,27 @@ const flashToastMap = {
 export function useFlash() {
   const page = usePage();
 
-  const flash = computed(() => {
-    return page.props?.flash ?? {};
-  });
+  const data = computed(() => page.props?.flash ?? {});
+
+  const isEmpty = computed(() => Object.keys(data.value).length === 0);
 
   const has = (key) => {
-    const value = flash.value?.[key];
+    const value = data.value?.[key];
     return value !== undefined && value !== null && value !== '';
   };
 
-  const get = (key, defaultValue = null) => {
-    return flash.value?.[key] ?? defaultValue;
-  };
+  const get = (key, defaultValue = null) =>
+    data.value?.[key] ?? defaultValue;
 
-  const all = () => {
-    return flash.value;
-  };
+  const all = () => data.value;
 
-  const isEmpty = computed(() => Object.keys(flash.value).length === 0);
-
-  return {
-    flash,
+  return reactive({
+    data,
+    isEmpty,
     has,
     get,
     all,
-    isEmpty,
-  };
+  });
 }
 
 /**
@@ -64,20 +59,29 @@ export function useFlashToasts() {
     () => page.props?.flash,
     (flash) => {
       if (!flash) return;
+      console.log(flash);
 
-      // Iterate over known toast keys
       for (const [key, type] of Object.entries(flashToastMap)) {
         const message = flash[key];
-
         if (!message) continue;
 
-        if (type === 'message') {
-          toast(message);
-        } else {
-          toast[type](message);
-        }
+        nextTick(() => {
+          if (type === 'message') {
+            if (typeof message === 'object') {
+              toast(message.message, { description: message.description });
+            } else {
+              toast(message);
+            }
+          } else {
+            if (typeof message === 'object') {
+              toast[type](message.message, { description: message.description });
+            } else {
+              toast[type](message);
+            }
+          }
+        });
       }
     },
-    { immediate: true }
+    { immediate: true, deep: true }
   );
 }
