@@ -1,19 +1,8 @@
 import { usePage } from '@inertiajs/vue3';
-import { computed, ComputedRef, watch } from 'vue';
+import { computed, watch } from 'vue';
 import { toast } from 'vue-sonner';
 
-export interface FlashMessages {
-  success?: string;
-  error?: string;
-  warning?: string;
-  info?: string;
-  message?: string;
-  [key: string]: string | undefined;
-}
-
-type ToastType = 'success' | 'error' | 'warning' | 'info' | 'message';
-
-const flashToastMap: Record<string, ToastType> = {
+const flashToastMap = {
   success: 'success',
   error: 'error',
   warning: 'warning',
@@ -24,24 +13,24 @@ const flashToastMap: Record<string, ToastType> = {
 export function useFlash() {
   const page = usePage();
 
-  const flash = computed<FlashMessages>(() => {
-    return (page.props?.flash as FlashMessages) ?? {};
+  const flash = computed(() => {
+    return page.props?.flash ?? {};
   });
 
-  const has = (key: string): boolean => {
+  const has = (key) => {
     const value = flash.value?.[key];
     return value !== undefined && value !== null && value !== '';
   };
 
-  const get = (key: string, defaultValue: string | null = null): string | null => {
+  const get = (key, defaultValue = null) => {
     return flash.value?.[key] ?? defaultValue;
   };
 
-  const all = (): FlashMessages => {
+  const all = () => {
     return flash.value;
   };
 
-  const isEmpty = computed<boolean>(() => Object.keys(flash.value).length === 0);
+  const isEmpty = computed(() => Object.keys(flash.value).length === 0);
 
   return {
     flash,
@@ -72,7 +61,7 @@ export function useFlashToasts() {
   const page = usePage();
 
   watch(
-    () => page.props?.flash as FlashMessages | undefined,
+    () => page.props?.flash,
     (flash) => {
       if (!flash) return;
 
@@ -85,7 +74,7 @@ export function useFlashToasts() {
         if (type === 'message') {
           toast(message);
         } else {
-          (toast as any)[type](message);
+          toast[type](message);
         }
       }
     },

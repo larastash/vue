@@ -1,11 +1,11 @@
-<script setup lang="ts">
+<script setup>
 import { useUser } from '@/composables/useUser';
 
-const { isGuest } = useUser()
+const user = useUser();
 </script>
 
 <template>
-    <template v-if="isGuest">
-        <slot v-bind="useUser()" />
+    <template v-if="user.isGuest">
+        <slot v-bind="user" />
     </template>
 </template>

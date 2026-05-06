@@ -1,45 +1,39 @@
 import { defineStore } from 'pinia';
 
-export type Theme = 'light' | 'dark' | 'system';
-
-export const validThemes: Theme[] = ['light', 'dark', 'system'];
-export const defaultTheme: Theme = 'system';
+export const validThemes = ['light', 'dark', 'system'];
+export const defaultTheme = 'system';
 
 // Module-level singleton state for the system theme listener
 let initialized = false;
-let removeSystemListener: (() => void) | null = null;
+let removeSystemListener = null;
 
-const getMediaQuery = (): MediaQueryList | null => {
+const getMediaQuery = () => {
   if (typeof window === 'undefined') return null;
   return window.matchMedia('(prefers-color-scheme: dark)');
 };
 
-interface ThemeState {
-  currentTheme: Theme;
-}
-
 export const useThemeStore = defineStore('themeStore', {
-  state: (): ThemeState => ({
+  state: () => ({
     currentTheme: defaultTheme,
   }),
 
   getters: {
     /** Resolved theme — always `'light'` or `'dark'` (never `'system'`). */
-    effectiveTheme(state): Exclude<Theme, 'system'> {
+    effectiveTheme(state) {
       if (state.currentTheme === 'system') {
         const mq = getMediaQuery();
         return mq?.matches ? 'dark' : 'light';
       }
-      return state.currentTheme as Exclude<Theme, 'system'>;
+      return state.currentTheme;
     },
 
-    isDark(): boolean {
+    isDark() {
       return this.effectiveTheme === 'dark';
     },
   },
 
   actions: {
-    setTheme(theme: Theme) {
+    setTheme(theme) {
       if (validThemes.includes(theme)) {
         this.currentTheme = theme;
       } else {

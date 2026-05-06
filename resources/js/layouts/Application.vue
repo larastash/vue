@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import Toaster from '@/components/Toaster.vue';
 import { useFlashToasts } from '@/composables/useFlash';
 

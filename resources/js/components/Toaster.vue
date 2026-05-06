@@ -33,7 +33,7 @@
     </Toaster>
 </template>
 
-<script setup lang="ts">
+<script setup>
 import { BanIcon, CheckCheckIcon, CircleAlertIcon, InfoIcon, Loader2Icon, XIcon } from '@lucide/vue';
 import { Toaster } from 'vue-sonner';
 </script>

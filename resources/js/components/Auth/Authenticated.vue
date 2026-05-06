@@ -1,11 +1,11 @@
-<script setup lang="ts">
+<script setup>
 import { useUser } from '@/composables/useUser';
 
-const { isAuthenticated } = useUser()
+const user = useUser();
 </script>
 
 <template>
-    <template v-if="isAuthenticated">
-        <slot v-bind="useUser()" />
+    <template v-if="user.isAuthenticated">
+        <slot v-bind="user" />
     </template>
 </template>

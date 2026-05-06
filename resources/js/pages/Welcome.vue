@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import Scope from '@/components/Scope.vue';
 import { useTheme } from '@/composables/useTheme';
 import Application from '@/layouts/Application.vue';
@@ -20,8 +20,8 @@ const { currentTheme, toggleTheme } = useTheme();
     <Application>
         <div class="absolute top-4 left-4 flex items-center gap-4">
             <Scope :data="{ count: 10, double: 0 }"
-                :init="(data: any) => (data.double = data.count * 2)"
-                :effect="(data: any) => (data.double = data.count * 2)"
+                :init="(data) => (data.double = data.count * 2)"
+                :effect="(data) => (data.double = data.count * 2)"
                 v-slot="{ data }"
             >
                 <div class="flex items-center gap-2">

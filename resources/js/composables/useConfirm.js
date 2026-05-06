@@ -1,31 +1,10 @@
-import { ComputedRef, readonly, ref, Ref } from 'vue';
-
-/** Visual variant for the confirm dialog (e.g. button color). */
-export type ConfirmVariant = 'default' | 'danger' | 'warning' | 'success' | 'info';
-
-/** Options passed to the `confirm()` call. */
-export interface ConfirmOptions {
-  title?: string;
-  message?: string;
-  confirmText?: string;
-  cancelText?: string;
-  variant?: ConfirmVariant;
-}
-
-/** Internal dialog state (all fields are always populated with defaults). */
-interface ConfirmState {
-  title: string;
-  message: string;
-  confirmText: string;
-  cancelText: string;
-  variant: ConfirmVariant;
-}
+import { readonly, ref } from 'vue';
 
 // Singleton reactive state shared across all useConfirm() instances
 const visible = ref(false);
-const state = ref<ConfirmState | null>(null);
+const state = ref(null);
 
-let resolvePromise: ((value: boolean) => void) | null = null;
+let resolvePromise = null;
 
 export function useConfirm() {
   /**
@@ -33,7 +12,7 @@ export function useConfirm() {
    * @param options - Dialog configuration.
    * @returns `true` if confirmed, `false` if cancelled.
    */
-  const confirm = (options: ConfirmOptions = {}): Promise<boolean> => {
+  const confirm = (options = {}) => {
     // Merge defaults with provided options
     state.value = {
       title: options.title ?? 'Confirm',
@@ -68,9 +47,9 @@ export function useConfirm() {
 
   return {
     /** Whether the dialog is currently visible. */
-    visible: readonly(visible) as ComputedRef<boolean>,
+    visible: readonly(visible),
     /** Current dialog state (title, message, variant, etc.). */
-    state: readonly(state) as ComputedRef<ConfirmState | null>,
+    state: readonly(state),
     confirm,
     accept,
     cancel,

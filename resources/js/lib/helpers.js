@@ -10,11 +10,7 @@
  * @example plural(5, ['яблоко', 'яблока', 'яблок']); // "5 яблок"
  * @example plural(2, ['день', 'дня', 'дней'], false); // "дня"
  */
-export function plural(
-  n: number,
-  forms: [string, string, string],
-  includeNumber = true
-): string {
+export function plural(n, forms, includeNumber = true) {
   if (!Array.isArray(forms) || forms.length !== 3) {
     throw new Error('Forms array must contain exactly 3 elements');
   }
@@ -26,7 +22,7 @@ export function plural(
   }
 
   const absN = Math.abs(numeric);
-  let word: string;
+  let word;
 
   if (!Number.isInteger(absN)) {
     // Fractional numbers typically use the genitive singular form (forms[1])
@@ -61,11 +57,7 @@ export function plural(
  *
  * @example truncate('Hello world!', 7); // "Hello…"
  */
-export function truncate(
-  str: string | null | undefined,
-  length: number,
-  suffix = '…'
-): string {
+export function truncate(str, length, suffix = '…') {
   if (!str || str.length <= length) return str ?? '';
   return str.slice(0, length).trimEnd() + suffix;
 }
@@ -81,11 +73,7 @@ export function truncate(
  * @example formatNumber(1234567); // "1 234 567"
  * @example formatNumber(1234.5, 'ru-RU', { minimumFractionDigits: 2 }); // "1 234,50"
  */
-export function formatNumber(
-  value: number,
-  locale = 'ru-RU',
-  options: Intl.NumberFormatOptions = {}
-): string {
+export function formatNumber(value, locale = 'ru-RU', options = {}) {
   const numeric = Number(value);
   if (!Number.isFinite(numeric)) return String(value);
   return new Intl.NumberFormat(locale, options).format(numeric);
@@ -101,11 +89,7 @@ export function formatNumber(
  *
  * @example formatCurrency(2999.9); // "2 999,90 ₽"
  */
-export function formatCurrency(
-  value: number,
-  currency = 'RUB',
-  locale = 'ru-RU'
-): string {
+export function formatCurrency(value, currency = 'RUB', locale = 'ru-RU') {
   const numeric = Number(value);
   if (!Number.isFinite(numeric)) return String(value);
   return new Intl.NumberFormat(locale, {
@@ -125,11 +109,7 @@ export function formatCurrency(
  * @example formatDate('2026-02-20'); // "20 февр. 2026 г."
  * @example formatDate('2026-02-20', { day: 'numeric', month: 'long' }); // "20 февраля"
  */
-export function formatDate(
-  date: string | Date,
-  options: Intl.DateTimeFormatOptions = { dateStyle: 'medium' },
-  locale = 'ru-RU'
-): string {
+export function formatDate(date, options = { dateStyle: 'medium' }, locale = 'ru-RU') {
   const d = date instanceof Date ? date : new Date(date);
   if (isNaN(d.getTime())) return String(date);
   return new Intl.DateTimeFormat(locale, options).format(d);
@@ -141,7 +121,7 @@ export function formatDate(
  * @param text - Text to copy.
  * @returns `true` if successful, `false` otherwise.
  */
-export async function copyToClipboard(text: string): Promise<boolean> {
+export async function copyToClipboard(text) {
   try {
     await navigator.clipboard.writeText(text);
     return true;
@@ -153,7 +133,6 @@ export async function copyToClipboard(text: string): Promise<boolean> {
 /**
  * Safely access nested object properties via dot-notation path.
  *
- * @template T - Return type.
  * @param obj - Source object.
  * @param path - Dot-notation path, e.g. `'user.address.city'`.
  * @param defaultValue - Fallback value.
@@ -162,14 +141,10 @@ export async function copyToClipboard(text: string): Promise<boolean> {
  * @example dataGet({ a: { b: 1 } }, 'a.b'); // 1
  * @example dataGet({}, 'a.b', 'fallback'); // "fallback"
  */
-export function dataGet<T = unknown>(
-  obj: Record<string, any> | null | undefined,
-  path: string,
-  defaultValue?: T
-): T | undefined {
+export function dataGet(obj, path, defaultValue) {
   if (!obj || !path) return defaultValue;
 
-  const value = path.split('.').reduce<any>((acc, part) => {
+  const value = path.split('.').reduce((acc, part) => {
     return acc && typeof acc === 'object' ? acc[part] : undefined;
   }, obj);
 
@@ -181,7 +156,7 @@ export function dataGet<T = unknown>(
  *
  * @returns Unique identifier string.
  */
-export function uid(): string {
+export function uid() {
   if (typeof crypto !== 'undefined' && crypto.randomUUID) {
     return crypto.randomUUID();
   }
@@ -198,6 +173,6 @@ export function uid(): string {
  *
  * @example await sleep(500);
  */
-export function sleep(ms: number): Promise<void> {
+export function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }

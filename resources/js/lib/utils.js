@@ -1,4 +1,4 @@
-import { clsx, type ClassValue } from "clsx";
+import { clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 
 /**
@@ -7,6 +7,6 @@ import { twMerge } from "tailwind-merge";
  *
  * @example cn('px-2 py-1', condition && 'px-4') // "py-1 px-4"
  */
-export function cn(...inputs: ClassValue[]) {
+export function cn(...inputs) {
   return twMerge(clsx(inputs));
 }

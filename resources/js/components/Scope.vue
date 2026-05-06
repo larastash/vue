@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import { reactive, watchEffect } from 'vue';
 
 const props = defineProps({

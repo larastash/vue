@@ -1,4 +1,4 @@
-import { useThemeStore, type Theme } from '@/stores/themeStore';
+import { useThemeStore } from '@/stores/themeStore';
 import { storeToRefs } from 'pinia';
 
 export function useTheme() {
@@ -6,7 +6,7 @@ export function useTheme() {
 
   const { currentTheme, isDark, effectiveTheme } = storeToRefs(store);
 
-  const cycleOrder: Theme[] = ['light', 'dark', 'system'];
+  const cycleOrder = ['light', 'dark', 'system'];
 
   /** Toggle to the next theme in the cycle: light → dark → system. */
   const toggleTheme = () => {
