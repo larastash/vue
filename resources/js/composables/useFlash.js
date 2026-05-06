@@ -59,7 +59,6 @@ export function useFlashToasts() {
     () => page.props?.flash,
     (flash) => {
       if (!flash) return;
-      console.log(flash);
 
       for (const [key, type] of Object.entries(flashToastMap)) {
         const message = flash[key];
