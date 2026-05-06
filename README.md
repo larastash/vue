@@ -40,7 +40,7 @@ Pre-configured with dark mode, flash toasts, state management, and a clean proje
 
 ```bash
 # Clone the repository
-git clone https://github.com/chipslays/vue.git my-app
+git clone https://github.com/larastash/vue.git my-app
 cd my-app
 
 # Install PHP dependencies

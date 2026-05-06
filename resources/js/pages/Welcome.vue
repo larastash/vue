@@ -63,13 +63,13 @@ const { currentTheme, toggleTheme } = useTheme();
                         <p class="text-gray-500 dark:text-gray-500">ready for something awesome</p>
                     </div>
                     <a
-                        href="https://github.com/chipslays/vue"
+                        href="https://github.com/larastash/vue"
                         target="_blank"
                         rel="noopener noreferrer"
                         class="text-gray-500 dark:text-gray-500 hover:text-black dark:hover:text-white flex items-center gap-2"
                     >
                         <ExternalLinkIcon class="shrink-0 size-4" />
-                        <span>chipslays/vue</span>
+                        <span>larastash/vue</span>
                     </a>
                 </div>
             </div>
