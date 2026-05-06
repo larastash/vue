@@ -1,5 +1,5 @@
 <template>
-    <Toaster :visibleToasts="3" :closeButton="true" position="bottom-center" :duration="Infinity" offset="16px" :toastOptions="{
+    <Toaster :visibleToasts="3" :closeButton="true" position="bottom-center" :duration="5000" offset="16px" :toastOptions="{
         unstyled: true,
         classes: {
             toast: 'bg-white dark:bg-gray-800 p-4 rounded-brand border flex items-center gap-4 md:min-w-96 shadow-xl shadow-gray-950/5 [&:has(.description)]:items-start font-sans',
