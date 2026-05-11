@@ -70,7 +70,7 @@ resources/js/
 ├── components/
 │   ├── Scope.vue             # Inline reactive state via scoped slot
 │   ├── Toaster.vue           # Pre-styled vue-sonner toaster
-│   └── Auth/
+│   └── auth/
 │       ├── Authenticated.vue # Renders slot only for authenticated users
 │       └── Guest.vue         # Renders slot only for guests
 ├── composables/
