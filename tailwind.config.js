@@ -1,5 +1,5 @@
-import defaultTheme from 'tailwindcss/defaultTheme';
 import colors from 'tailwindcss/colors';
+import defaultTheme from 'tailwindcss/defaultTheme';
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -14,16 +14,16 @@ module.exports = {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['"Google Sans"', ...defaultTheme.fontFamily.sans],
+                sans: ['"Noto Sans"', ...defaultTheme.fontFamily.sans],
                 serif: [...defaultTheme.fontFamily.serif],
                 mono: [...defaultTheme.fontFamily.mono],
             },
             colors: {
-                primary: colors.yellow,
+                primary: colors.orange,
                 info: colors.blue,
                 success: colors.green,
                 danger: colors.red,
-                black: '#111111',
+                black: '#1c1c1c',
                 gray: colors.zinc,
             },
             borderRadius: {
@@ -31,7 +31,4 @@ module.exports = {
             },
         },
     },
-    plugins: [
-        //
-    ],
 }
