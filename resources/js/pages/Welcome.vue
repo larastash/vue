@@ -45,13 +45,13 @@ const { currentTheme, toggleTheme } = useTheme();
         </div>
 
         <div class="min-h-dvh flex flex-col items-center justify-center bg-[radial-gradient(circle_at_1px_1px,rgba(0,0,0,0.1)_1px,transparent_0)] dark:bg-[radial-gradient(circle_at_1px_1px,rgba(255,255,255,0.05)_1px,transparent_0)] bg-size-[20px_20px]">
-            <figure class="text-center">
+            <figure class="text-center font-serif">
                 <blockquote>
-                    <p class="text-lg max-w-lg text-pretty w-full leading-relaxed hyphens-auto">
+                    <p class="text-2xl font-medium text-primary-500 max-w-lg text-pretty w-full leading-relaxed hyphens-auto">
                         {{ quote }}
                     </p>
                 </blockquote>
-                <figcaption class="mt-4 text-gray-500 dark:text-gray-500">
+                <figcaption class="mt-4 text-base">
                     — {{ author }}
                 </figcaption>
             </figure>

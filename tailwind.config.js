@@ -14,9 +14,9 @@ module.exports = {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['"Noto Sans"', ...defaultTheme.fontFamily.sans],
-                serif: [...defaultTheme.fontFamily.serif],
-                mono: [...defaultTheme.fontFamily.mono],
+                sans: ['"Inter"', ...defaultTheme.fontFamily.sans],
+                serif: ['"Lora"', ...defaultTheme.fontFamily.serif],
+                mono: ['"Source Code Pro"', ...defaultTheme.fontFamily.mono],
             },
             colors: {
                 primary: colors.orange,
@@ -24,7 +24,7 @@ module.exports = {
                 success: colors.green,
                 danger: colors.red,
                 black: '#1c1c1c',
-                gray: colors.zinc,
+                gray: colors.neutral,
             },
             borderRadius: {
                 brand: defaultTheme.borderRadius['xl'],
