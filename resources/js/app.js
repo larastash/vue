@@ -27,9 +27,10 @@ createInertiaApp({
                 component: 'tippy',
                 componentSingleton: 'tippy-singleton',
                 defaultProps: {
+                    theme: 'custom',
                     animation: 'scale-subtle',
                     inertia: true,
-                    arrow: false,
+                    arrow: true,
                     allowHTML: false,
                     delay: [150, 100],
                     duration: [150, 150],
@@ -38,7 +39,7 @@ createInertiaApp({
             });
     },
     progress: {
-        delay: 300,
+        delay: 500,
         color: "var(--progress-color)",
         includeCSS: true,
         showSpinner: false,
