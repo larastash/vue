@@ -1,3 +1,5 @@
+/*
+Example utility:
 @utility scrollbar-none {
     -ms-overflow-style: none;
     scrollbar-width: none;
@@ -5,3 +7,4 @@
         display: none;
     }
 }
+*/
