@@ -3,11 +3,8 @@
 <?php
 
 $commands = [
-    'composer install',
-    'php artisan key:generate',
-    'php artisan storage:link',
-    'php artisan migrate --force',
-    'npm install'
+    'composer update --with-all-dependencies',
+    'npm update',
 ];
 
 copy('.env.example', '.env');
@@ -20,5 +17,5 @@ foreach ($commands as $command) {
 }
 
 echo "---------------------------------------------\n";
-echo "Have fun! 🎉\n";
+echo "Project updated! 🎉 \n";
 echo "---------------------------------------------\n";

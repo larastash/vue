@@ -13,7 +13,9 @@ return [
     'alpha_num'              => 'The value must only contain letters and numbers.',
     'any_of'                 => 'This field is invalid.',
     'array'                  => 'This field must contain an array.',
+    'array_keys'             => 'This field must only contain the following keys: :values.',
     'ascii'                  => 'The value must only contain single-byte alphanumeric characters and symbols.',
+    'base64'                 => 'This field must be a valid Base64 string.',
     'before'                 => 'This must be a date before :date.',
     'before_or_equal'        => 'This must be a date before or equal to :date.',
     'between'                => [
