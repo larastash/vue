@@ -1,6 +1,6 @@
 <script setup>
-import Toaster from '@/components/Toaster.vue';
-import { useFlashToasts } from '@/composables/useFlash';
+import Toaster from '@/Components/Toaster.vue';
+import { useFlashToasts } from '@/Composables/useFlash';
 
 useFlashToasts();
 </script>

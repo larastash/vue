@@ -23,6 +23,7 @@ module.exports = {
                 info: colors.blue,
                 success: colors.green,
                 danger: colors.red,
+                warning: colors.yellow,
                 black: '#1c1c1c',
                 gray: colors.neutral,
             },

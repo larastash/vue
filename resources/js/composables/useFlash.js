@@ -46,7 +46,7 @@ export function useFlash() {
  *
  * @example
  * // In your layout:
- * import { useFlashToasts } from '@/composables/useFlash';
+ * import { useFlashToasts } from '@/Composables/useFlash';
  * useFlashToasts();
  *
  * // In a Laravel controller:

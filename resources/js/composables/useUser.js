@@ -1,4 +1,4 @@
-import { dataGet } from '@/lib/helpers';
+import { dataGet } from '@/helpers';
 import { usePage } from '@inertiajs/vue3';
 import { computed, reactive } from 'vue';
 

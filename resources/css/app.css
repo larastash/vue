@@ -10,5 +10,5 @@
 @import "@css/base.css";
 @import "@css/components.css";
 @import "@css/utilities.css";
-@import "@css/override.css";
+@import "@css/overrides.css";
 @import "tw-animate-css";

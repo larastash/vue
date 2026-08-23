@@ -5,6 +5,12 @@ use Laravel\Telescope\Watchers;
 
 return [
 
+
+    /** @see app/Providers/TelescopeServiceProvider.php */
+    'whitelist' => [
+        'admin@localhost',
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Telescope Master Switch
@@ -17,10 +23,6 @@ return [
     */
 
     'enabled' => env('TELESCOPE_ENABLED', true),
-
-    'whitelist' => [
-        'admin@localhost',
-    ],
 
     /*
     |--------------------------------------------------------------------------

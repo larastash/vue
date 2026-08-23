@@ -1,229 +1,58 @@
-# Vue Starter Kit
+<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-A modern starter kit for building full-stack applications with **Laravel**, **Inertia.js**, and **Vue 3**.
+<p align="center">
+<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+</p>
 
-Pre-configured with dark mode, flash toasts, state management, and a clean project structure — ready to build on top of.
+## About Laravel
 
-## Tech Stack
+Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
-| Layer | Technology |
-|---|---|
-| **Backend** | Laravel, PHP 8.3+ |
-| **Frontend** | Vue 3, JavaScript |
-| **Routing** | Inertia.js v3 |
-| **Styling** | Tailwind CSS v4 |
-| **State** | Pinia + pinia-plugin-persistedstate |
-| **Toasts** | vue-sonner |
-| **Icons** | @lucide/vue |
-| **Date** | dayjs (Russian locale) |
+- [Simple, fast routing engine](https://laravel.com/docs/routing).
+- [Powerful dependency injection container](https://laravel.com/docs/container).
+- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
+- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
+- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
+- [Robust background job processing](https://laravel.com/docs/queues).
+- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
-## Features
+Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-- **Dark Mode** — light / dark / system with OS-level listener, persisted in localStorage
-- **Flash Toasts** — Laravel `session('flash')` messages automatically shown as toasts
-- **Confirm Dialog** — programmatic `await confirm()` pattern via Promise
-- **Auth Helpers** — `useUser()` composable with roles, permissions, `can()`/`cannot()`, `is()`/`isNot()`
-- **Auth Components** — `<Authenticated>` and `<Guest>` render-slot components
-- **Scope Component** — inline reactive state without a store
-- **Utility Helpers** — `plural()`, `truncate()`, `formatNumber()`, `formatCurrency()`, `formatDate()`, `copyToClipboard()`, `dataGet()`, `uid()`, `sleep()`
-- **Pinia Persistence** — app and theme stores persisted out of the box
-- **CSS Architecture** — split into `theme.css`, `base.css`, `components.css`, `utilities.css`
+## Learning Laravel
 
-## Requirements
+Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
 
-- PHP 8.3+
-- Composer
-- Node.js 20+
-- npm
+In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
 
-## Installation
+You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+
+## Agentic Development
+
+Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
 
 ```bash
-# Clone the repository
-git clone https://github.com/larastash/vue.git my-app
-cd my-app
+composer require laravel/boost --dev
 
-# Install PHP dependencies
-composer install
-
-# Install Node dependencies
-npm install
-
-# Configure environment
-cp .env.example .env
-php artisan key:generate
-
-# Run database migrations
-php artisan migrate
-
-# Start development servers
-composer run dev
+php artisan boost:install
 ```
 
-> The `VITE_APP_NAME` variable in `.env` controls the page `<title>`.
+Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
 
-## Project Structure
+## Contributing
 
-```
-resources/js/
-├── app.js                    # Entry point: Inertia, Pinia, dayjs setup
-├── components/
-│   ├── Scope.vue             # Inline reactive state via scoped slot
-│   ├── Toaster.vue           # Pre-styled vue-sonner toaster
-│   └── auth/
-│       ├── Authenticated.vue # Renders slot only for authenticated users
-│       └── Guest.vue         # Renders slot only for guests
-├── composables/
-│   ├── useApp.js             # Access to the app store
-│   ├── useConfirm.js         # Programmatic confirm dialog (Promise-based)
-│   ├── useFlash.js           # Flash messages + auto-toast watcher
-│   ├── usePageProps.js       # Access to Inertia page props
-│   ├── useTheme.js           # Theme toggle (light/dark/system cycle)
-│   └── useUser.js            # Current user, roles, permissions, guards
-├── layouts/
-│   ├── Application.vue       # Main app layout (with Toaster)
-│   └── Guest.vue             # Guest layout (with Toaster)
-├── lib/
-│   ├── helpers.js            # Utility functions (plural, truncate, format...)
-│   └── utils.js              # cn() — Tailwind class merger
-├── pages/
-│   └── Welcome.vue           # Demo page with theme toggle & Scope example
-└── stores/
-    ├── appStore.js           # Global app state (extend as needed)
-    └── themeStore.js         # Theme state with system preference listener
-```
+Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
 
-## Composables
+## Code of Conduct
 
-### `useUser()`
+In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
 
-Access the authenticated user from Inertia shared props. Returns a `reactive` object — always access properties through the object, do not destructure.
+## Security Vulnerabilities
 
-```js
-const user = useUser();
-
-// user.data        — raw user object (or null)
-// user.isAuthenticated
-// user.can('edit-posts')
-```
-
-| Property | Description |
-|---|---|
-| `data` | Current user object (or `null`) |
-| `id` | User ID |
-| `isAuthenticated` | Whether the user is logged in |
-| `isGuest` | Whether the user is a guest |
-| `isEmailVerified` | Whether the email is verified |
-| `initials(length?)` | User name initials |
-| `roles` | User roles array |
-| `permissions` | User permissions array |
-| `hasRole(...roles)` | Has any of the given roles |
-| `hasAnyRole(...roles)` | Has any of the given roles |
-| `hasAllRoles(...roles)` | Has all of the given roles |
-| `can(permission)` | Has the permission |
-| `cannot(permission)` | Does not have the permission |
-| `is(otherUser)` | Same user by ID |
-| `isNot(otherUser)` | Different user by ID |
-| `get(path, default?)` | Dot-notation access to user fields |
-| `has(path)` | Check existence via dot-notation |
-
-### `useTheme()`
-
-Cycle through light → dark → system themes.
-
-```js
-const { currentTheme, isDark, toggleTheme, setTheme } = useTheme();
-```
-
-### `useConfirm()`
-
-Promise-based confirm dialog.
-
-```js
-const { confirm } = useConfirm();
-
-const ok = await confirm({
-  title: 'Delete record?',
-  message: 'This action cannot be undone.',
-  variant: 'danger',
-});
-
-if (ok) {
-  // proceed
-}
-```
-
-### `useFlash()` / `useFlashToasts()`
-
-Access Laravel flash messages. Call `useFlashToasts()` once in your layout to auto-show toasts.
-
-```js
-// In a layout:
-useFlashToasts();
-
-// In a component:
-const { has, get, flash } = useFlash();
-if (has('success')) console.log(get('success'));
-```
-
-Laravel side:
-```php
-return back()->with('flash', ['success' => 'Saved!']);
-```
-
-### `usePageProps()`
-
-Access to Inertia page props.
-
-```js
-const { prop } = usePageProps();
-const appName = prop('appName', 'Laravel');
-```
-
-## Components
-
-### `<Scope>`
-
-Inline reactive state without creating a store or ref in the parent.
-
-```vue
-<Scope :data="{ count: 0 }" v-slot="{ data }">
-  <button @click="data.count++">{{ data.count }}</button>
-</Scope>
-```
-
-### `<Authenticated>` / `<Guest>`
-
-Conditional rendering based on auth state. Slot props are the full `useUser()` reactive object.
-
-```vue
-<Authenticated v-slot="{ data }">
-  <p>Hello, {{ data.name }}</p>
-</Authenticated>
-
-<Guest>
-  <p>Please log in</p>
-</Guest>
-```
-
-## CSS Architecture
-
-Styles are split into focused files imported in `resources/css/app.css`:
-
-| File | Purpose |
-|---|---|
-| `theme.css` | Theme variables and custom animations |
-| `base.css` | Global base styles (body, scrollbar, focus resets) |
-| `components.css` | Component-level styles (NProgress bar) |
-| `utilities.css` | Custom Tailwind utilities (`scrollbar-none`) |
-
-## PHP Helpers
-
-Global helper functions available server-side (via `app/helpers.php`):
-
-- `user($guard?)` — get the authenticated user
-- `plural($n, $forms, $includeNumber)` — Russian pluralization
+If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
 ## License
 
-Open-source under the [MIT license](https://opensource.org/licenses/MIT).
+The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).

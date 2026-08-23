@@ -1,7 +1,7 @@
 <script setup>
-import Scope from '@/components/Scope.vue';
-import { useTheme } from '@/composables/useTheme';
-import Application from '@/layouts/Application.vue';
+import Reactive from '@/Components/Reactive.vue';
+import { useTheme } from '@/Composables/useTheme';
+import Application from '@/Layouts/Application.vue';
 import { Head } from '@inertiajs/vue3';
 import { ExternalLinkIcon, MoonIcon, SmileIcon, SunIcon, SunMoonIcon } from '@lucide/vue';
 import { toast } from 'vue-sonner';
@@ -19,18 +19,23 @@ const { currentTheme, toggleTheme } = useTheme();
 
     <Application>
         <div class="absolute top-4 left-4 flex items-center gap-4">
-            <Scope :data="{ count: 10, double: 0 }"
-                :init="(data) => (data.double = data.count * 2)"
-                :effect="(data) => (data.double = data.count * 2)"
+            <Reactive
+                :data="{
+                    count: 10,
+                    double: 0,
+                    recalc() { this.double = this.count * 2 },
+                }"
+                :init="(data) => data.recalc()"
+                :effect="(data) => data.recalc()"
                 v-slot="{ data }"
             >
                 <div class="flex items-center gap-2">
-                    <button @click="data.count--" class="px-2.5 py-0.5 rounded-brand border bg-white dark:bg-gray-800">-</button>
-                    <button @click="data.count++" class="px-2.5 py-0.5 rounded-brand border bg-white dark:bg-gray-800">+</button>
-                    <button @click="data.count *= 2" class="px-2.5 py-0.5 rounded-brand border bg-white dark:bg-gray-800">*</button>
+                    <button @click="data.count--" class="size-8 flex items-center justify-center rounded-brand border bg-white dark:bg-gray-800/50 active:translate-y-0.5">-</button>
+                    <button @click="data.count++" class="size-8 flex items-center justify-center rounded-brand border bg-white dark:bg-gray-800/50 active:translate-y-0.5">+</button>
+                    <button @click="data.count *= 2" class="size-8 flex items-center justify-center rounded-brand border bg-white dark:bg-gray-800/50 active:translate-y-0.5">*</button>
                     <code>{{ data }}</code>
                 </div>
-            </Scope>
+            </Reactive>
         </div>
 
         <div class="absolute top-4 right-4 flex items-center gap-4">

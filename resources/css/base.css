@@ -20,7 +20,7 @@
     ::before,
     ::backdrop,
     ::file-selector-button {
-        @apply border-gray-200 outline-gray-200 dark:border-gray-900 dark:outline-gray-900;
+        @apply border-gray-200 outline-gray-200 dark:border-gray-800 dark:outline-gray-800;
     }
 
     button,
