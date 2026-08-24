@@ -12,7 +12,7 @@
     }
 
     body {
-        @apply text-black bg-gray-100 dark:text-gray-200 dark:bg-gray-900 text-sm font-sans antialiased;
+        @apply bg-200 text-300 text-sm font-sans antialiased;
     }
 
     *,
@@ -20,7 +20,7 @@
     ::before,
     ::backdrop,
     ::file-selector-button {
-        @apply border-gray-200 outline-gray-200 dark:border-gray-800 dark:outline-gray-800;
+        @apply border-color-300;
     }
 
     button,

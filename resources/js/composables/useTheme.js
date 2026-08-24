@@ -8,7 +8,6 @@ export function useTheme() {
 
   const cycleOrder = ['light', 'dark', 'system'];
 
-  /** Toggle to the next theme in the cycle: light → dark → system. */
   const toggleTheme = () => {
     const idx = cycleOrder.indexOf(store.currentTheme);
     const nextIndex = (idx + 1) % cycleOrder.length;
@@ -17,12 +16,10 @@ export function useTheme() {
   };
 
   return {
-    // Refs
     currentTheme,
     effectiveTheme,
     isDark,
 
-    // Actions/Methods
     toggleTheme,
     setTheme: store.setTheme,
   };

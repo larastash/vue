@@ -14,8 +14,6 @@ export function useUser() {
   const isEmailVerified = computed(() => Boolean(data.value?.email_verified_at));
   const isAuthenticated = computed(() => Boolean(data.value));
   const isGuest = computed(() => !data.value);
-  const roles = computed(() => data.value?.roles ?? []);
-  const permissions = computed(() => data.value?.permissions ?? []);
 
   const initials = (length = 2) => {
     const name = data.value?.name;
@@ -26,22 +24,16 @@ export function useUser() {
   const get = (path, defaultValue = null) =>
     dataGet(data.value, path, defaultValue) ?? null;
 
+  const set = (key, value) => {
+    data.value[key] = value;
+  };
+
+  const unset = (key) => {
+    delete data.value[key];
+  };
+
   const has = (path) =>
     dataGet(data.value, path) != null;
-
-  const hasRole = (...args) =>
-    args.flat().some((r) => roles.value.includes(r));
-
-  const hasAnyRole = (...args) =>
-    args.flat().some((r) => roles.value.includes(r));
-
-  const hasAllRoles = (...args) =>
-    args.flat().every((r) => roles.value.includes(r));
-
-  const can = (permission) =>
-    permissions.value.includes(permission);
-
-  const cannot = (permission) => !can(permission);
 
   const is = (otherUser) =>
     id.value != null && id.value === otherUser?.id;
@@ -54,16 +46,11 @@ export function useUser() {
     isEmailVerified,
     isAuthenticated,
     isGuest,
-    roles,
-    permissions,
     initials,
     get,
+    set,
+    unset,
     has,
-    hasRole,
-    hasAnyRole,
-    hasAllRoles,
-    can,
-    cannot,
     is,
     isNot,
   });
