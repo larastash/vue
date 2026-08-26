@@ -40,9 +40,10 @@ export default defineConfig({
     },
     resolve: {
         alias: {
+            '@': path.resolve(import.meta.dirname, './resources/js'),
             '@js': path.resolve(import.meta.dirname, './resources/js'),
             '@css': path.resolve(import.meta.dirname, './resources/css'),
-            'ziggy-js': path.resolve('vendor/tightenco/ziggy'),
+            'ziggy-js': path.resolve(import.meta.dirname, 'vendor/tightenco/ziggy'),
         },
     },
 });

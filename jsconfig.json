@@ -1,0 +1,22 @@
+{
+    "compilerOptions": {
+        "paths": {
+            "@/*": ["./resources/js/*"],
+            "@js/*": ["./resources/js/*"],
+            "@css/*": ["./resources/css/*"],
+            "ziggy-js": ["./vendor/tightenco/ziggy/*"]
+        },
+        "jsx": "preserve",
+        "allowImportingTsExtensions": true,
+        "moduleResolution": "bundler",
+        "resolveJsonModule": true
+    },
+    "include": [
+        "resources/js/**/*"
+    ],
+    "exclude": [
+        "node_modules",
+        "vendor",
+        "public"
+    ]
+}

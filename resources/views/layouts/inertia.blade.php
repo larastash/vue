@@ -4,6 +4,28 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+        <script>
+            (function () {
+                try {
+                    var raw = localStorage.getItem('theme');
+                    var theme = 'system';
+
+                    if (raw) {
+                        var parsed = JSON.parse(raw);
+                        theme = parsed.currentTheme ?? 'system';
+                    }
+
+                    var isDark = theme === 'dark' ||
+                        (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+
+                    document.documentElement.classList.toggle('dark', isDark);
+                    document.documentElement.dataset.theme = theme;
+                } catch (e) {
+                    //
+                }
+            })();
+        </script>
+
         <title>{{ config('app.name') }}</title>
 
         <link rel="preconnect" href="https://fonts.googleapis.com">
