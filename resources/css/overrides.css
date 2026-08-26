@@ -1,0 +1,16 @@
+.tippy-box[data-theme~='custom'] {
+    @apply bg-black dark:bg-gray-100 rounded-lg;
+}
+
+.tippy-box[data-theme~='custom'] .tippy-content {
+    white-space: normal;
+    @apply px-2 py-1 text-white dark:text-black text-[13px] max-w-lg w-auto;
+}
+
+.tippy-box[data-theme~='custom'] .tippy-arrow {
+    @apply text-black;
+}
+
+.dark .tippy-box[data-theme~='custom'] .tippy-arrow {
+    @apply text-gray-100;
+}

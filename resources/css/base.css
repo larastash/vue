@@ -1,0 +1,38 @@
+@layer base {
+    :root {
+        --progress-color: #000000;
+    }
+
+    .dark {
+        --progress-color: #ffffff;
+    }
+
+    html {
+        @apply scrollbar-thumb-primary-500 scrollbar-track-gray-100 dark:scrollbar-track-gray-900;
+    }
+
+    body {
+        @apply bg-200 text-300 text-sm font-sans antialiased;
+    }
+
+    *,
+    ::after,
+    ::before,
+    ::backdrop,
+    ::file-selector-button {
+        @apply border-color-300;
+    }
+
+    button,
+    a,
+    textarea,
+    input,
+    select {
+        @apply outline-none focus:outline-none;
+    }
+
+    button:not(:disabled),
+    [role="button"]:not(:disabled) {
+        cursor: pointer;
+    }
+}

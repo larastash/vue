@@ -1,0 +1,116 @@
+/*
+Example utility:
+@utility scrollbar-none {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+*/
+
+/* Числовая шкала яркости текста (0 — самый тёмный в light, 9 — самый светлый) */
+@utility text-100 {
+    @apply text-gray-950 dark:text-gray-50;
+}
+@utility text-200 {
+    @apply text-gray-900 dark:text-gray-100;
+}
+@utility text-300 {
+    @apply text-gray-800 dark:text-gray-200;
+}
+@utility text-400 {
+    @apply text-gray-700 dark:text-gray-300;
+}
+@utility text-500 {
+    @apply text-gray-600 dark:text-gray-400;
+}
+@utility text-600 {
+    @apply text-gray-500 dark:text-gray-500;
+}
+@utility text-700 {
+    @apply text-gray-400 dark:text-gray-600;
+}
+@utility text-800 {
+    @apply text-gray-300 dark:text-gray-700;
+}
+@utility text-900 {
+    @apply text-gray-200 dark:text-gray-800;
+}
+@utility text-1000 {
+    @apply text-gray-100 dark:text-gray-900;
+}
+
+/* Числовая шкала фона (0 — базовый, 9 — самый близкий к среднему серому) */
+@utility bg-100 {
+    @apply bg-gray-50 dark:bg-gray-950;
+}
+@utility bg-200 {
+    @apply bg-gray-100 dark:bg-gray-900;
+}
+@utility bg-300 {
+    @apply bg-gray-200 dark:bg-gray-800;
+}
+@utility bg-400 {
+    @apply bg-gray-300 dark:bg-gray-700;
+}
+@utility bg-500 {
+    @apply bg-gray-400 dark:bg-gray-600;
+}
+@utility bg-600 {
+    @apply bg-gray-500 dark:bg-gray-500;
+}
+@utility bg-700 {
+    @apply bg-gray-600 dark:bg-gray-400;
+}
+@utility bg-800 {
+    @apply bg-gray-700 dark:bg-gray-300;
+}
+@utility bg-900{
+    @apply bg-gray-800 dark:bg-gray-200;
+}
+@utility bg-1000 {
+    @apply bg-gray-900 dark:bg-gray-100;
+}
+
+/* Числовая шкала цвета границы (0 — базовый, 9 — самый близкий к среднему серому) */
+@utility border-color-100 {
+    @apply border-gray-50 dark:border-gray-950;
+    @apply outline-gray-50 dark:outline-gray-950;
+}
+@utility border-color-200 {
+    @apply border-gray-100 dark:border-gray-900;
+    @apply outline-gray-100 dark:outline-gray-900;
+}
+@utility border-color-300 {
+    @apply border-gray-200 dark:border-gray-800;
+    @apply outline-gray-200 dark:outline-gray-800;
+}
+@utility border-color-400 {
+    @apply border-gray-300 dark:border-gray-700;
+    @apply outline-gray-300 dark:outline-gray-700;
+}
+@utility border-color-500 {
+    @apply border-gray-400 dark:border-gray-600;
+    @apply outline-gray-400 dark:outline-gray-600;
+}
+@utility border-color-600 {
+    @apply border-gray-500 dark:border-gray-500;
+    @apply outline-gray-500 dark:outline-gray-500;
+}
+@utility border-color-700 {
+    @apply border-gray-600 dark:border-gray-400;
+    @apply outline-gray-600 dark:outline-gray-400;
+}
+@utility border-color-800 {
+    @apply border-gray-700 dark:border-gray-300;
+    @apply outline-gray-700 dark:outline-gray-300;
+}
+@utility border-color-900 {
+    @apply border-gray-800 dark:border-gray-200;
+    @apply outline-gray-800 dark:outline-gray-200;
+}
+@utility border-color-1000 {
+    @apply border-gray-900 dark:border-gray-100;
+    @apply outline-gray-900 dark:outline-gray-100;
+}
