@@ -40,9 +40,9 @@ return Application::configure(basePath: dirname(__DIR__))
             abort(404);
         });
         $exceptions->respond(function (Response $response, Throwable $exception, Request $request) {
-            // if (app()->environment(['local', 'testing']) || !in_array($response->getStatusCode(), [404, 403, 500, 503])) {
-            //     return $response;
-            // }
+            if (app()->environment(['local', 'testing']) || !in_array($response->getStatusCode(), [404, 403, 500, 503])) {
+                return $response;
+            }
 
             return Inertia::render('Error', ['status' => $response->getStatusCode()])
                 ->rootView('layouts/inertia')
