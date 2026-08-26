@@ -70,25 +70,26 @@ const themeStore = useThemeStore();
                     — {{ author }}
                 </figcaption>
             </figure>
+        </div>
 
-            <div class="absolute bottom-4 inset-x-4">
-                <div class="flex items-center justify-between">
-                    <div class="flex items-center gap-2.5">
-                        <figure class="shrink-0 size-1.5 rounded-full bg-green-500 dark:bg-green-600 ring-2 ring-green-300 dark:ring-green-500 animate-pulse" />
-                        <p class="text-600 leading-none">
-                            ready for something awesome
-                        </p>
-                    </div>
-                    <a
-                        href="https://github.com/larastash/vue"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="text-600 hover:text-500 flex items-center gap-2"
-                    >
-                        <ExternalLinkIcon class="shrink-0 size-4" />
-                        <span>larastash/vue</span>
-                    </a>
+        <div class="absolute bottom-4 inset-x-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2.5">
+                    <figure class="shrink-0 size-1.5 rounded-full bg-green-500 dark:bg-green-600 ring-2 ring-green-300 dark:ring-green-500 animate-pulse">
+                    </figure>
+                    <p class="text-600 leading-none">
+                        ready for something awesome
+                    </p>
                 </div>
+                <a
+                    href="https://github.com/larastash/vue"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="text-600 hover:text-500 flex items-center gap-2"
+                >
+                    <ExternalLinkIcon class="shrink-0 size-4" />
+                    <span>larastash/vue</span>
+                </a>
             </div>
         </div>
     </ApplicationLayout>

@@ -65,7 +65,11 @@ class TelescopeServiceProvider extends TelescopeApplicationServiceProvider
                 abort(404);
             }
 
-            return Gate::check('viewTelescope', [$request->user()]);
+            if (! Gate::check('viewTelescope', [$request->user()])) {
+                return false;
+            }
+
+            return true;
         });
     }
 
